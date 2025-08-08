@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
@@ -32,23 +32,40 @@ const Header = () => {
   };
 
   const nav_headings = [
-    {
-      path: "/",
-      display: "Home",
-    },
-    {
-      path: "/",
-      display: "Dishes",
-    },
-    {
-      path: "/",
-      display: "Services",
-    },
-    {
-      path: "/",
-      display: "About Us",
-    },
+    { path: "/", display: "Home" },
+    { path: "/", display: "Dishes" },
+    { path: "/", display: "Services" },
+    { path: "/", display: "About Us" },
   ];
+
+  const list = (anchor) => {
+    return (
+      <Box
+        sx={{
+          width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
+        }}
+        role="presentation"
+        onClick={slideMenu(anchor, false)}
+        onKeyDown={slideMenu(anchor, false)}
+      >
+        <List>
+          {nav_headings.map((item, index) => (
+            <ListItem key={index} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index === 0 && <HomeIcon />}
+                  {index === 1 && <FeaturedPlayListIcon />}
+                  {index === 2 && <MiscellaneousServicesIcon />}
+                  {index === 3 && <PhoneIcon />}
+                </ListItemIcon>
+                <ListItemText primary={item.display} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    );
+  };
 
   const NavBarLinksBox = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -59,6 +76,7 @@ const Header = () => {
       display: "none",
     },
   }));
+
   const NavBarLink = styled(Typography)(({ theme }) => ({
     fontSize: "16px",
     color: "4F5361",
@@ -91,7 +109,6 @@ const Header = () => {
         alignItems: "center",
         justifyContent: "space-between",
         padding: "40px",
-        maxWidth: "auto",
         backgroundColor: "#FED801",
         marginLeft: "0px",
         marginBottom: "-24px",
@@ -110,14 +127,10 @@ const Header = () => {
           anchor="left"
           open={mobileMenu["left"] || false}
           onClose={slideMenu("left", false)}
-        />
-        <NavBarlogo src={logoImg} alt="" />
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        ></Box>
+        >
+          {list("left")}
+        </Drawer>
+        <NavBarlogo src={logoImg} alt="Logo" />
         <NavBarLinksBox>
           {nav_headings.map((item, index) => (
             <NavBarLink key={index} variant="body2">
