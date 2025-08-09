@@ -1,12 +1,11 @@
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import React from "react";
 
 const CustomButton = ({
   backgroundColor,
   color,
   buttonText,
-//   welcomeBtn,
+  welcomeBtn,
 //   guiddeBtn,
 //   getStartButton,
 }) => {
